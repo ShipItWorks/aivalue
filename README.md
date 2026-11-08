@@ -1,8 +1,8 @@
 # AI Value
 
-Model AI ROI, P&L margins, balance-sheet cash flow and 30-day adoption pilots.
+Model AI ROI, P&L margins, Balance Sheet cash flow & 30-day adoption pilots.
 
-**Score: 72 / 100** on our own [rubric](https://shipitworks.com/how-we-score/). Stage: Beta. Scored 2026-11-01; this record was updated 2026-11-07 from the [product page](https://shipitworks.com/apps/#aivalue).
+**Score: 68 / 100** on our own [rubric](https://shipitworks.com/how-we-score/). Stage: Beta. Scored 2026-11-08; this record was updated 2026-11-08 from the [product page](https://shipitworks.com/apps/#aivalue).
 
 Every number on the product page names the file it came from. The lists below are copied from that page, not rewritten.
 
@@ -10,22 +10,28 @@ Every number on the product page names the file it came from. The lists below ar
 
 ## What works today
 
-- 7 financial calculators (FinancialEngine)
-- Catalog + Room database load
-- JSON backup/restore
+- 7 financial calculators (FinancialEngine) (Proven)
+- Catalog + Room database load (Proven)
+- JSON backup/restore (Proven)
 
 ## Not done yet
 
-- Executive PDF export still unproven: the instrumented test added in 2bef31c could not be re-run on 2026-11-01 - the test APK installed on device 37101FDJG002VJ predates it and threw ClassNotFoundException for ExecutivePdfInstrumentedTest (Tests run: 1, Failures: 1). Needs a fresh installDebugAndroidTest before the claim can stand
-- No UI/instrumented run of the app screens; no signed release build and no tracked screenshots, so it cannot go to Play
-- assembleRelease not run; the existing release APK is debug-key signed
-- No user guide; root still holds ~20 stray chat-dump files, and there are wrong-path duplicate catalog JSONs
+- Executive PDF export (Not tested yet)
+- UI screens (Home, Explore, Calculators, Playbooks, Learn, Privacy) (Not tested yet)
+- Executive PDF export: built, not tested yet. No run log on main; the instrumented test needs a device and a fresh installDebugAndroidTest, and the device check in HANDOFF.md has no saved log. The multi-page fix is on an unmerged PR
+- UI screens: not tested yet; no instrumented or UI run, no tracked screenshots
+- Privacy: no permissions declared in the debug APK and no analytics library by name in release dependencies (2026-11-07 logs); no network capture, so runtime behaviour is not yet traced. README line 3 'runs entirely on the phone' is not yet traced either (fix PR #23 open)
+- No signed release build and assembleRelease not run; the existing release APK is debug-key signed, so it cannot go to Play
+- No user guide, no LICENSE, no CHANGELOG file; root still holds ~20 stray chat-dump files and wrong-path duplicate catalog JSONs
 
 ## What changed
 
+- 2026-11-08: Score re-measured against main at 497c725 (tag v0.2.0): 68/100 on our own rubric, down from 72. Three of five features (calculators, catalog and database, backup and restore) now link a saved unit-test log from 2026-11-07 (58 tests, 0 failed, exit 0). Executive PDF export and the screens have no run log, so they are not tested yet.
+- 2026-11-08: The Home screen button now reads 'Privacy & Methodology: no network permission declared' instead of 'no data leaves this device', and the Play kit drops 'Zero Cloud Collection' (PR #25, tag v0.2.0); no network capture exists, so traffic is not yet traced.
+- 2026-11-08: CI on main now runs on the self-hosted runner (PR #24); the five latest main runs show success.
 - 2026-11-07: The README and the in-app privacy copy now say only what was checked: the debug build declares no permissions (so no INTERNET), the release dependencies include no analytics, crash-reporting or ads library (a name match, not a network capture), and 58 unit tests pass (no device or PDF rendering coverage). Release v0.1.1.
 
-Full list with release tags: [CHANGELOG](CHANGELOG.md).
+See [CHANGELOG](CHANGELOG.md).
 
 ## Demo
 
